@@ -2,6 +2,7 @@
 
 [![PyPI - Version](https://img.shields.io/pypi/v/my-arithmetic-ethan.svg)](https://pypi.org/project/my-arithmetic-ethan)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/my-arithmetic-ethan.svg)](https://pypi.org/project/my-arithmetic-ethan)
+![coverage](https://https://gitlab.univ-lr.fr/elebla01/my-arithmetic-ethan/badges/main/coverage.svg?job=coverage)
 
 -----
 
