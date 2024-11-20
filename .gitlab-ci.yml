@@ -21,7 +21,6 @@ build:
   only:
     - tags
 
-# Job de coverage, exécuté après le test
 coverage:
   stage: coverage
   image: python:3.12
