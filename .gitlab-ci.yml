@@ -1,5 +1,7 @@
 stages:
+  - build
   - test
+  - coverage
 
 test:
   stage: test
@@ -7,3 +9,34 @@ test:
   script:
     - pip install hatch
     - hatch test
+
+build:
+  stage: build
+  image: python:3.12
+  script:
+    - pip install hatch
+    - pip install hatch-vcs
+    - hatch build
+    - ls dist/
+  only:
+    - tags
+
+# Job de coverage, exécuté après le test
+coverage:
+  stage: coverage
+  image: python:3.12
+  script:
+    - pip install pytest pytest-cov
+    - pytest --cov=src/my_arithmetic_ethan --cov-report=xml
+  artifacts:
+    paths:
+      - coverage.xml
+  only:
+    - main
+
+coverage_report:
+  stage: coverage
+  script:
+    - curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --data "coverage_report=coverage.xml" https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/coverage_reports
+  only:
+    - main
