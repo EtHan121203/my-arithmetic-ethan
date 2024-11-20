@@ -3,6 +3,7 @@ concurrent = 4
 [[runners]]
 name = "myRunner"
 url = "https://gitlab.univ-lr.fr/"
+token = "glrt-t3_yaQzaoQY-rGy7sR3gAZT"
 executor = "docker"
 [runners.docker]
   tls_verify = true
