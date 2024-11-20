@@ -60,6 +60,9 @@ dependencies = [
 ]
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/my_arithmetic_ethan tests}"
+[tool.hatch.build]
+vcs = true
+
 
 [tool.coverage.run]
 source_pkgs = ["my_arithmetic_ethan", "tests"]
