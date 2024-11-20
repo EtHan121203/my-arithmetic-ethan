@@ -10,17 +10,6 @@ test:
     - pip install hatch
     - hatch test
 
-build:
-  stage: build
-  image: python:3.12
-  script:
-    - pip install hatch
-    - pip install hatch-vcs
-    - hatch build
-    - ls dist/
-  only:
-    - tags
-
 coverage:
   stage: coverage
   image: python:3.12
@@ -30,3 +19,25 @@ coverage:
   coverage: '/TOTAL.+?(\d+\%)$/'
   only:
     - main
+
+build_stable:
+  stage: build
+  image: python:3.12
+  script:
+    - echo "Déploiement my-arithmetic-$USER sur les serveurs stables"
+    - pip install hatch hatch-vcs
+    - hatch build
+    - ls dist/
+  only:
+    - tags
+
+build_non_stable:
+  stage: build
+  image: python:3.12
+  script:
+    - echo "Déploiement my-arithmetic-$USER sur les serveurs develop"
+    - pip install hatch hatch-vcs
+    - hatch build
+    - ls dist/
+  only:
+    - develop
