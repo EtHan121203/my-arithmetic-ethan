@@ -48,7 +48,7 @@ sync-with-github:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git remote remove github || true
-    - git remote add github https://oauth2:${ACCESS_TOKEN}@github.com/elebla01/my-arithmetic-ethan.git
+    - git remote add github https://oauth2:${ACCESS_TOKEN}@github.com/Ethan121203/my-arithmetic-ethan.git
     - |
       if git ls-remote --exit-code github main; then
         BRANCH="main"
