@@ -48,16 +48,18 @@ sync-with-github:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git remote remove github || true
-    - git remote add github https://oauth2:${ACCESS_TOKEN}@github.com/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+    - git remote add github https://oauth2:${ACCESS_TOKEN}@github.com/elebla01/my-arithmetic-ethan.git
     - |
-      # Vérifier si la branche main existe, sinon utiliser master
       if git ls-remote --exit-code github main; then
         BRANCH="main"
-      else
+      elif git ls-remote --exit-code github master; then
         BRANCH="master"
+      else
+        echo "Aucune branche valide trouvée sur le remote. Vérifiez le dépôt."
+        exit 1
       fi
   script:
+    - git fetch github
     - git checkout $BRANCH
-    - git pull origin $BRANCH
     - git pull github $BRANCH
     - git push origin HEAD:$BRANCH
