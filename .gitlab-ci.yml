@@ -42,24 +42,24 @@ build_non_stable:
   only:
     - develop
 
-sync-with-github:
-  before_script:
-    - apk add --no-cache git
-    - git config --global user.name "${GITLAB_USER_NAME}"
-    - git config --global user.email "${GITLAB_USER_EMAIL}"
-    - git remote remove github || true
-    - git remote add github https://oauth2:${ACCESS_TOKEN}@github.com/Ethan121203/my-arithmetic-ethan.git
-    - |
-      if git ls-remote --exit-code github main; then
-        BRANCH="main"
-      elif git ls-remote --exit-code github master; then
-        BRANCH="master"
-      else
-        echo "Aucune branche valide trouvée sur le remote. Vérifiez le dépôt."
-        exit 1
-      fi
-  script:
-    - git fetch github
-    - git checkout $BRANCH
-    - git pull github $BRANCH
-    - git push origin HEAD:$BRANCH
+#sync-with-github:
+#  before_script:
+#    - apk add --no-cache git
+#    - git config --global user.name "${GITLAB_USER_NAME}"
+#    - git config --global user.email "${GITLAB_USER_EMAIL}"
+#    - git remote remove github || true
+#    - git remote add github https://oauth2:${ACCESS_TOKEN}@github.com/Ethan121203/my-arithmetic-ethan.git
+#    - |
+#      if git ls-remote --exit-code github main; then
+#        BRANCH="main"
+#      elif git ls-remote --exit-code github master; then
+#        BRANCH="master"
+#      else
+#        echo "Aucune branche valide trouvée sur le remote. Vérifiez le dépôt."
+#        exit 1
+#      fi
+#  script:
+#    - git fetch github
+#    - git checkout $BRANCH
+#    - git pull github $BRANCH
+#    - git push origin HEAD:$BRANCH
