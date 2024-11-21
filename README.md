@@ -16,6 +16,11 @@
 pip install my-arithmetic-ethan
 ```
 
+## À retrouver également sur Github
+
+[my-arithmetic-ethan](https://github.com/EtHan121203/my-arithmetic-ethan)
+
 ## License
 
 `my-arithmetic-ethan` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+
