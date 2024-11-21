@@ -1,0 +1,62 @@
+name: CI/CD Pipeline
+
+# Événements déclencheurs
+on:
+  push:
+    branches:
+      - main  # Exécute les tests sur chaque push dans main
+      - develop  # Déploie une version sur develop
+    tags:
+      - '*'  # Exécute une action sur chaque création de tag
+  pull_request:
+    branches:
+      - main  # Teste les PR ouvertes vers main
+      
+ # Déploie une version sur chaque création de tag
+jobs:
+  # Job de test pour chaque modification de code
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Install dependencies
+        run: |
+          pip install hatch
+
+      - name: Run tests
+        run: hatch test
+
+  # Job de déploiement pour chaque tag ou push sur develop
+  deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    needs: test  # Exécute ce job seulement si "test" a réussi
+    if: github.event_name == 'push' || github.event_name == 'tags'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Install dependencies
+        run: |
+          pip install hatch hatch-vcs
+
+      - name: Build project
+        run: |
+          hatch build
+          echo "Déploiement de la version : ${{ github.ref }}"
+      
+      - name: List distribution folder
+        run: ls dist/
